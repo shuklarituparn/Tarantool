@@ -1,0 +1,9 @@
+write data to the Tarantool cluster using the CRUD module. This module defines which shard to read from and which shard to write to, and does it for you.
+
+Important: all cluster operations must be performed only on the router and using the CRUD module.
+
+Plug the CRUD module and declare three procedures:
+
+    creating a user
+    adding a video
+    liking a video

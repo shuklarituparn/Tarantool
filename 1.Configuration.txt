@@ -1,0 +1,23 @@
+A Tarantool cluster has two service roles: Router and Storage.
+
+    Storage is used to store the data
+    Router is an intermediary between clients and storages. It accepts a client's request, takes data from the proper storage, and returns it to the client.
+
+Tarantool has two built-in storage engines: memtx and vinyl. Memtx stores all data in RAM while asynchronously writing to disk so that nothing is lost.    
+
+In the schema file we can notice the above mentioned thing
+
+Vinyl is a standard on-disk storage engine optimized for write-intensive scenarios.
+
+In this tutorial, you have a large number of both reads and writes. That's why you will use memtx.
+
+Important: The name bucket_id is reserved. If you choose a different name, sharding will not work for that space. If you don't use sharding in the project, you can remove the second index.
+
+To understand which field to shard data by, Tarantool uses sharding_key. sharding_key points to the field in the space by which records will be sharded. Tarantool will take a hash from this field when insert, will calculate the bucket number and select the required Storage for recording.
+
+Buckets may be repeated, and each storage stores a certain range of buckets.
+
+More interesting facts:
+
+    The parts field in the index definition can contain several fields in order to build a composite (multi-part) index. You won't need it in this tutorial.
+    Tarantool does not support foreign keys, so you have to check manually that video_id and user_id exist in the likes space.

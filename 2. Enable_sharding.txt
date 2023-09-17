@@ -1,0 +1,8 @@
+Turn on sharding 
+
+Enable sharding in the cluster using the "Bootstrap vshard" button. It is located in the "Cluster" tab at the top right.
+
+More details about sharding will be discussed in the next steps.
+
+
+If we enable the S2 master then we can see that the data has been evenly divied into the cluster. If we disable the S2 master then the all the data will move to the S1

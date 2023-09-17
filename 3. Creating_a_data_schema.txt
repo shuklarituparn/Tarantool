@@ -1,0 +1,31 @@
+Create the necessary tables. In Tarantool, they are called spaces.
+
+You will need to store:
+
+    users
+    videos and their descriptions, with a pre-calculated number of likes
+    actual likes
+
+Tarantool has two built-in storage engines: memtx and vinyl. Memtx stores all data in RAM while asynchronously writing to disk so that nothing is lost.
+
+Vinyl is a standard on-disk storage engine optimized for write-intensive scenarios.
+
+In this tutorial, you have a large number of both reads and writes. That's why you will use memtx.
+
+You've created three spaces (tables) in memtx, and for each space, you've created the necessary indexes.
+
+There are two of them for each space:
+
+    The first index is a primary key. It is required for reading and writing data.
+    The second one is the index on the bucket_id field. This is a special field used in sharding.
+
+Important: The name bucket_id is reserved. If you choose a different name, sharding will not work for that space. If you don't use sharding in the project, you can remove the second index.
+
+To understand which field to shard data by, Tarantool uses sharding_key. sharding_key points to the field in the space by which records will be sharded. Tarantool will take a hash from this field when insert, will calculate the bucket number and select the required Storage for recording.
+
+Buckets may be repeated, and each storage stores a certain range of buckets.
+
+More interesting facts:
+
+    The parts field in the index definition can contain several fields in order to build a composite (multi-part) index. You won't need it in this tutorial.
+    Tarantool does not support foreign keys, so you have to check manually that video_id and user_id exist in the likes space.

@@ -1,0 +1,62 @@
+spaces:
+  users:
+    engine: memtx
+    is_local: false
+    temporary: false
+    sharding_key:
+      - "user_id"
+    format:
+      - { name: bucket_id, type: unsigned, is_nullable: false }
+      - { name: user_id, type: uuid, is_nullable: false }
+      - { name: fullname, type: string, is_nullable: false }
+    indexes:
+      - name: user_id
+        unique: true
+        parts: [{ path: user_id, type: uuid, is_nullable: false }]
+        type: HASH
+      - name: bucket_id
+        unique: false
+        parts: [{ path: bucket_id, type: unsigned, is_nullable: false }]
+        type: TREE
+
+  videos:
+    engine: memtx           
+    is_local: false
+    temporary: false
+    sharding_key:
+      - "video_id"
+    format:
+      - { name: bucket_id, type: unsigned, is_nullable: false }
+      - { name: video_id, type: uuid, is_nullable: false }
+      - { name: description, type: string, is_nullable: true }
+    indexes:
+      - name: video_id
+        unique: true
+        parts: [{ path: video_id, type: uuid, is_nullable: false }]
+        type: HASH
+      - name: bucket_id
+        unique: false
+        parts: [{ path: bucket_id, type: unsigned, is_nullable: false }]
+        type: TREE
+
+  likes:
+    engine: memtx
+    is_local: false
+    temporary: false
+    sharding_key:
+      - "video_id"
+    format:
+      - { name: bucket_id, type: unsigned, is_nullable: false }
+      - { name: like_id, type: uuid, is_nullable: false }
+      - { name: user_id, type: uuid, is_nullable: false }
+      - { name: video_id, type: uuid, is_nullable: false }
+      - { name: timestamp, type: string, is_nullable: true }
+    indexes:
+      - name: like_id
+        unique: true
+        parts: [{ path: like_id, type: uuid, is_nullable: false }]
+        type: HASH
+      - name: bucket_id
+        unique: false
+        parts: [{ path: bucket_id, type: unsigned, is_nullable: false }]
+        type: TREE
