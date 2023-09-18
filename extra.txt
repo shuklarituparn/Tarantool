@@ -1,0 +1,84 @@
+
+
+
+tarantool> box.cfg{listen = 3301}
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> Tarantool 2.11.1-0-g96877bd35 Linux-x86_64-RelWithDebInfo
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> log level 5
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> wal/engine cleanup is paused
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> mapping 268435456 bytes for memtx tuple arena...
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> Actual slab_alloc_factor calculated on the basis of desired slab_alloc_factor = 1.044274
+2023-09-18 20:23:13.322 [2160504] main/103/interactive I> mapping 134217728 bytes for vinyl tuple arena...
+2023-09-18 20:23:13.331 [2160504] main/103/interactive I> update replication_synchro_quorum = 1
+2023-09-18 20:23:13.331 [2160504] main/103/interactive I> instance uuid 34c8ce84-8fa1-4aef-9564-448a0360346f
+2023-09-18 20:23:13.331 [2160504] main/103/interactive I> tx_binary: bound to 0.0.0.0:3301
+2023-09-18 20:23:13.331 [2160504] main/103/interactive I> initializing an empty data directory
+2023-09-18 20:23:13.347 [2160504] main/103/interactive I> assigned id 1 to replica 34c8ce84-8fa1-4aef-9564-448a0360346f
+2023-09-18 20:23:13.347 [2160504] main/103/interactive I> update replication_synchro_quorum = 1
+2023-09-18 20:23:13.347 [2160504] main/103/interactive I> cluster uuid de49c02a-1dbb-4347-bbb9-1296a6e37722
+2023-09-18 20:23:13.347 [2160504] snapshot/101/main I> saving snapshot `./00000000000000000000.snap.inprogress'
+2023-09-18 20:23:13.349 [2160504] snapshot/101/main I> done
+2023-09-18 20:23:13.349 [2160504] main/103/interactive I> ready to accept requests
+2023-09-18 20:23:13.349 [2160504] main/104/gc I> wal/engine cleanup is resumed
+2023-09-18 20:23:13.349 [2160504] main/103/interactive/box.load_cfg I> set 'listen' configuration option to 3301
+2023-09-18 20:23:13.349 [2160504] main/105/checkpoint_daemon I> scheduled next checkpoint for Mon Sep 18 21:42:18 2023
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tarantool Version Information: This line indicates the version of Tarantool you're running, which is "2.11.1-0-g96877bd35"
+in this case. It also mentions the platform, which is "Linux-x86_64-RelWithDebInfo."
+
+Log Level: The line "log level 5" indicates that the server is running with log level 5. Log levels are used to control
+the verbosity of logs, with higher numbers indicating more detailed logs.
+
+Wal/Engine Cleanup: This line mentions that the "wal/engine cleanup is paused." This typically refers to the Write-Ahead
+Log (WAL) engine, which is used for durability and crash recovery in Tarantool.
+
+Memory Mapping: These lines indicate that Tarantool is mapping memory for the Memtx and Vinyl storage engines. Memtx and
+ Vinyl are storage engines used in Tarantool for different purposes.
+
+Replication Configuration: The lines starting with "update replication_synchro_quorum" indicate that the replication
+ configuration is being updated. Replication settings control how data is replicated across multiple instances of Tarantool.
+
+Instance UUID: This line shows the unique identifier (UUID) for this Tarantool instance. It's used to uniquely identify
+ this instance within a cluster.
+
+Binding to IP and Port: The line "tx_binary: bound to 0.0.0.0:3301" indicates that Tarantool has successfully bound to
+the IP address 0.0.0.0 (which means it's listening on all available network interfaces) and port 3301. This is the address
+and port where clients can connect to the Tarantool server.
+
+Initializing Data Directory: This line indicates that Tarantool is initializing an empty data directory. Tarantool stores
+its data in a specified data directory.
+
+Replica ID: The line "assigned id 1 to replica" shows that the Tarantool instance has been assigned the replica ID 1.
+This is important for replication in a cluster setup.
+
+Cluster UUID: This line shows the unique identifier (UUID) for the cluster. Each cluster has a unique identifier to
+ distinguish it from other clusters.
+
+Snapshot Information: These lines indicate that Tarantool is creating a snapshot of its data. Snapshots are periodic
+backups of the data.
+
+Ready to Accept Requests: The line "ready to accept requests" indicates that the Tarantool server is fully initialized
+and is now ready to accept client requests.
+
+Checkpoint Daemon: The line "scheduled next checkpoint" indicates that the checkpoint daemon has scheduled the next
+checkpoint operation. Checkpoints are used to optimize the storage and durability of data.
+

@@ -6,3 +6,15 @@ More details about sharding will be discussed in the next steps.
 
 
 If we enable the S2 master then we can see that the data has been evenly divied into the cluster. If we disable the S2 master then the all the data will move to the S1
+
+
+
+You can repeat box.space...:insert{} and box.space...:select{} (or conn.space...:insert{} and conn.space...:select{}) indefinitely, on either Tarantool instance.
+
+When the testing is over:
+
+    To drop the space: s:drop()
+    To stop tarantool: Ctrl+C or Ctrl+D
+    To stop Tarantool (an alternative): the standard Lua function os.exit()
+    To stop Tarantool (from another terminal): sudo pkill -f tarantool
+    To destroy the test: rm -r ~/tarantool_sandbox
