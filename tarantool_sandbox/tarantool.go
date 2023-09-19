@@ -18,7 +18,12 @@ func main() {
 
 	defer conn.Close()
 
+	/////////////////////////////////////////// INSERT INTO DATABASE ///////////////////////////////////////////////////
+
 	_, err = conn.Insert("tester", []interface{}{4, "ABBA", 1972})
+
+	/////////////////////////////////////////// QUERY THE DATABASE ///////////////////////////////////////////////////
+
 	resp2, err := conn.Select("tester", "primary", 0, 1, tarantool.IterEq, []interface{}{4})
 
 	/*
@@ -32,6 +37,8 @@ func main() {
 
 	// As we updated our database with secondary key, it works perfectly fine
 
+	/////////////////////////////////////////// UPDATE THE DATABASE ///////////////////////////////////////////////////
+
 	resp2, err = conn.Update("tester", "primary", []interface{}{4}, []interface{}{[]interface{}{"+", 2, 3}})
 
 	/*
@@ -42,6 +49,20 @@ func main() {
 	resp2, err = conn.Replace("tester", []interface{}{4, "New band", 2011}) //ABBA and 1975 will change
 
 	resp2, err = conn.Upsert("tester", []interface{}{4, "Another band", 2000}, []interface{}{[]interface{}{"+", 2, 5}})
+	//[] is the common response for the upsert function as the main function of this is to insert or update
+
+	/////////////////////////////////////////// DELETE FROM DATABASE ///////////////////////////////////////////////////
+
+	resp2, err = conn.Delete("tester", "primary", []interface{}{4})
+
+	//To delete all the tuples in the database us the space.call.truncate
+
+	resp2, err = conn.Call("box.space.tester:truncate", []interface{}{})
+
+	resp2, err = conn.Call("box.space.tester:drop", []interface{}{})
+
+	//use the space.call.drop to delete the entire space
+
 	if err != nil {
 		log.Fatal(err)
 	}
